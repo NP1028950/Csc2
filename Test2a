@@ -1,0 +1,27 @@
+import java.util.Arrays;
+
+public class Test2a {
+    public static void main(String[] args) {
+        int[] oldArray = {11, 2, 31, 4, 5, 0};
+        int[] newArray = rearrangeArray(oldArray);
+        
+        System.out.println("Old Array: " + Arrays.toString(oldArray));
+        System.out.println("New Array: " + Arrays.toString(newArray));
+    }
+
+    public static int[] rearrangeArray(int[] oldArray) {
+        int[] newArray = new int[oldArray.length];
+        int evenIndex = 0;
+        int oddIndex = oldArray.length - 1;
+
+        for (int num : oldArray) {
+            if (num % 2 == 0) {
+                newArray[evenIndex++] = num;
+            } else {
+                newArray[oddIndex--] = num;
+            }
+        }
+
+        return newArray;
+    }
+}
