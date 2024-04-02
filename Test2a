@@ -2,7 +2,7 @@ import java.util.Arrays;
 
 public class Test2a {
     public static void main(String[] args) {
-        int[] oldArray = {11, 2, 31, 4, 5, 0};
+        int[] oldArray = {7, 12, 18, 3, 9, 25, 4, 6};
         int[] newArray = rearrangeArray(oldArray);
         
         System.out.println("Old Array: " + Arrays.toString(oldArray));
