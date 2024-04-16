@@ -1,1 +1,74 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
+public class Hw3 {
+    public static void main(String[] args) {
+        List<Integer> deck = initializeDeck();
+        Collections.shuffle(deck);
+
+        List<Integer> playerHand = new ArrayList<>();
+        List<Integer> dealerHand = new ArrayList<>();
+
+        dealInitialCards(deck, playerHand, dealerHand);
+
+        while (playerHand.size() < 5 && (getHandValue(playerHand) < 21 || playerHand.contains(1))) {
+            playerHand.add(deck.remove(0));
+        }
+
+        while (dealerHand.size() < 5 && (getHandValue(dealerHand) < 16 || dealerHand.contains(1))) {
+            dealerHand.add(deck.remove(0));
+        }
+
+        System.out.println("Player's Hand: " + playerHand);
+        System.out.println("Dealer's Hand: " + dealerHand);
+
+        int playerScore = getHandValue(playerHand);
+        int dealerScore = getHandValue(dealerHand);
+
+        System.out.println("Player's Score: " + playerScore);
+        System.out.println("Dealer's Score: " + dealerScore);
+
+        if ((playerScore == 21 && playerHand.size() == 2) || (dealerScore > 21 && playerScore <= 21) ||
+                (playerScore <= 21 && playerScore > dealerScore)) {
+            System.out.println("Player wins!");
+        } else {
+            System.out.println("Dealer wins!");
+        }
+    }
+
+    private static List<Integer> initializeDeck() {
+        List<Integer> deck = new ArrayList<>();
+        for (int i = 1; i <= 13; i++) {
+            deck.add(Math.min(i, 10)); // Face cards have value 10
+        }
+        return deck;
+    }
+
+    private static void dealInitialCards(List<Integer> deck, List<Integer> playerHand, List<Integer> dealerHand) {
+        playerHand.add(deck.remove(0));
+        dealerHand.add(deck.remove(0));
+        playerHand.add(deck.remove(0));
+        dealerHand.add(deck.remove(0));
+    }
+
+    private static int getHandValue(List<Integer> hand) {
+        int value = 0;
+        int numAces = 0;
+
+        for (int card : hand) {
+            if (card == 1) {
+                numAces++;
+            }
+            value += card;
+        }
+
+        while (value > 21 && numAces > 0) {
+            value -= 10;
+            numAces--;
+        }
+
+        return value;
+    }
+}
