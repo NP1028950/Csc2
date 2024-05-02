@@ -1,0 +1,19 @@
+public class Test3a {
+    public static void main(String[] args) {
+        int[] array = {2, 5, 2, 7, 8, 2, 3, 2, 9};
+        int value = 2;
+
+        int count = countOccurrences(array, value);
+        System.out.println("The value " + value + " occurs " + count + " times in the array.");
+    }
+
+    public static int countOccurrences(int[] array, int value) {
+        int count = 0;
+        for (int num : array) {
+            if (num == value) {
+                count++;
+            }
+        }
+        return count;
+    }
+}
